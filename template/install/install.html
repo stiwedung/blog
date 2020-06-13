@@ -1,0 +1,42 @@
+{{ define "install/install.html" }}
+<!DOCTYPE html>
+<html>
+    <head>
+        {{ template "head/head" .}}
+    </head>
+    <body>
+        <form method="post" action="/install">
+            <table class="form-table">
+                <tr>
+                    <th scope="row"><label for="env">环境</label></th>
+                    <td>
+                        <label><input type="radio" name="env" value="dev" checked="checked">开发环境</label>
+                        <label><input type="radio" name="env" value="pro">生产环境</label>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="dbname">数据库名</label></th>
+                    <td><input type="text" name="dbname" size="25" value="db_blog"></td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="username">用户名</label></th>
+                    <td><input type="text" name="username" size="25" value="root"></td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="pwd">密码</label></th>
+                    <td><input type="text" name="pwd" size="25" value=""></td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="dbhost">数据库主机</label></th>
+                    <td><input type="text" name="dbhost" size="25" value="localhost"></td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="dbprot">数据库端口</label></th>
+                    <td><input type="text" name="dbport" size="25" value="3306"></td>
+                </tr>
+            </table>
+            <p class="step"><input type="submit" name="submit" value="提交" class="button"></p>
+        </form>
+    </body>
+</html>
+{{ end }}
