@@ -2,9 +2,11 @@ package dao
 
 import (
 	"github.com/stiwedung/blog/config"
+	"github.com/stiwedung/blog/model"
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/stiwedung/libgo/log"
+	"xorm.io/core"
 	"xorm.io/xorm"
 )
 
@@ -29,20 +31,26 @@ func doConnect(url string) {
 		return
 	}
 	if err := db.Ping(); err != nil {
-		log.Errorf("mysql ping failed: %v", err)
-		db.Close()
-		db = nil
+		log.Fatalf("mysql ping failed: %v", err)
 		return
 	}
 	if _, err := db.Exec("use " + config.Config.DB.DBName); err != nil {
 		log.Errorf("database %s not exist: %v", config.Config.DB.DBName, err)
 		_, err = db.Exec("CREATE DATABASE " + config.Config.DB.DBName + " DEFAULT CHARACTER SET utf8mb4")
 		if err != nil {
-			log.Errorf("create database %s error: %v", config.Config.DB.DBName, err)
-			db.Close()
-			db = nil
+			log.Fatalf("create database %s error: %v", config.Config.DB.DBName, err)
 			return
 		}
+	}
+	db.Dialect().URI().DBName = config.Config.DB.DBName
+
+	tblMapper := core.NewPrefixMapper(core.GonicMapper{}, "tbl_")
+	db.SetTableMapper(tblMapper)
+	db.SetColumnMapper(core.GonicMapper{})
+
+	if err := db.Sync2(model.Models...); err != nil {
+		log.Fatalf("create tables error: %v", err)
+		return
 	}
 }
 
