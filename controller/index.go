@@ -1,8 +1,6 @@
 package controller
 
 import (
-	"net/http"
-
 	"github.com/gin-gonic/gin"
 )
 
@@ -17,5 +15,5 @@ func (ctrl *indexController) relativePath() string {
 }
 
 func (ctrl *indexController) GET(ctx *gin.Context) {
-	ctx.String(http.StatusOK, "index page")
+	articleList(ctx)
 }
