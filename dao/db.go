@@ -52,8 +52,6 @@ func doConnect(url string) {
 		log.Fatalf("create tables error: %v", err)
 		return
 	}
-
-	initArticleSQL()
 }
 
 func Disconnect() {

@@ -17,8 +17,17 @@ type (
 		Tag       string `xorm:"index notnull"`
 		ArticleID int    `xorm:"index notnull"`
 	}
+
+	User struct {
+		ID       int    `xorm:"pk autoincr"`
+		UserName string `xorm:"index notnull"`
+		Passcode string `xorm:"notnull"`
+		Passwd   string `xorm:"notnull"`
+		LoginIP  string `xorm:"notnull"`
+		IsAdmin  bool   `xorm:"notnull default(0)"`
+	}
 )
 
 var Models = []interface{}{
-	Article{}, Tag{},
+	Article{}, Tag{}, User{},
 }

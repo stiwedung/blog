@@ -4,6 +4,8 @@ import (
 	"path/filepath"
 	"reflect"
 
+	"github.com/gin-contrib/sessions"
+	"github.com/gin-contrib/sessions/cookie"
 	"github.com/stiwedung/blog/config"
 
 	"github.com/gin-gonic/gin"
@@ -44,6 +46,7 @@ func MapRoutes() *gin.Engine {
 	}
 	route := gin.New()
 	route.Use(logMiddleware, installMiddleware)
+	route.Use(sessions.Sessions("user", cookie.NewStore([]byte("gnudewits235711"))))
 	for _, patt := range templatePattern {
 		route.LoadHTMLGlob(filepath.Join(config.ROOT, patt))
 	}

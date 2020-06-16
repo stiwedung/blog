@@ -3,7 +3,9 @@ package controller
 import (
 	"net/http"
 
+	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
+	"github.com/stiwedung/blog/service"
 )
 
 func init() {
@@ -23,5 +25,21 @@ func (ctrl *adminController) GET(ctx *gin.Context) {
 }
 
 func (ctrl *adminController) POST(ctx *gin.Context) {
-
+	var isLocal bool
+	if ctx.Request.RemoteAddr == "127.0.0.1" {
+		isLocal = true
+	}
+	username := ctx.PostForm("username")
+	passwd := ctx.PostForm("passwd")
+	err := service.Login(username, passwd, isLocal)
+	if err != nil {
+		show404Page(ctx)
+		return
+	}
+	session := sessions.Default(ctx)
+	session.Set(userInfo, &sessionData{
+		UserName: username,
+	})
+	ctx.Redirect(http.StatusPermanentRedirect, "/")
+	session.Save()
 }
