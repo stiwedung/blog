@@ -7,5 +7,5 @@ import (
 )
 
 func show404Page(ctx *gin.Context) {
-	ctx.String(http.StatusNotFound, "404 page")
+	ctx.HTML(http.StatusNotFound, "404.html", nil)
 }
