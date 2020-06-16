@@ -8,10 +8,22 @@ import (
 	"github.com/stiwedung/blog/service"
 )
 
+func init() {
+	ctrl := new(articleController)
+	addController(ctrl)
+	addRegister(ctrl)
+}
+
 type articleController struct{}
 
 func (ctrl *articleController) relativePath() string {
 	return "/article/:id"
+}
+
+func (ctrl *articleController) regist(g *gin.RouterGroup) {
+	g.GET("/list/article", articleList)
+	g.GET("/editor", articleEditor)
+	g.POST("/write", articleWrite)
 }
 
 func (ctrl *articleController) GET(ctx *gin.Context) {
@@ -31,4 +43,12 @@ func articleList(ctx *gin.Context) {
 		return
 	}
 	ctx.String(http.StatusOK, "article %s", lst[0].Title)
+}
+
+func articleEditor(ctx *gin.Context) {
+
+}
+
+func articleWrite(ctx *gin.Context) {
+
 }

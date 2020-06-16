@@ -1,0 +1,29 @@
+{{ define "admin/admin.html" }}
+<!DOCTYPE html>
+<html>
+    <head>
+        {{ template "head/head" .}}
+        <link rel="stylesheet" href="/static/css/admin/admin.css" type="text/css">
+    </head>
+    <body>
+        <h1 id="head">管理员登陆</h1>
+        <form method="post" action="/admin">
+            <table>
+                <tr>
+                    <th scope="row">用户名</th>
+                    <td><input type="text" name="username" size="25" value="root"></td>
+                </tr>
+                <tr>
+                    <th scope="row">密码</th>
+                    <td><input type="password" name="passwd" size="25"></td>
+                </tr>
+                <tr>
+                    <th scope="row"></th>
+                    <td align="right"><input type="submit" name="submit" value="登录"></td>
+                </tr>
+            </table>
+            
+        </form>
+    </body>
+</html>
+{{ end }}

@@ -1,0 +1,15 @@
+html {
+    background: #f9f9f9;
+}
+
+body {
+    background: #fff;
+    color: #333;
+    margin: 2rem auto;
+    padding: 1rem;
+    max-width: 300px;
+}
+
+#head {
+    text-align: center;
+}
