@@ -43,6 +43,7 @@ type dbConfig struct {
 type commonConfig struct {
 	ServerPort  int
 	ReleaseMode bool
+	LogCaller   bool
 }
 
 type config struct {

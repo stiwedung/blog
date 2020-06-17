@@ -30,6 +30,10 @@ func doConnect(url string) {
 		log.Fatalf("connect mysql failed: %v", err)
 		return
 	}
+	db.SetLogger(&logger{
+		Logger:    log.GetLogger(),
+		isShowSQL: !config.Config.Common.ReleaseMode,
+	})
 	if err := db.Ping(); err != nil {
 		log.Fatalf("mysql ping failed: %v", err)
 		return

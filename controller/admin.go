@@ -20,7 +20,7 @@ func (ctrl *adminController) relativePath() string {
 }
 
 func (ctrl *adminController) GET(ctx *gin.Context) {
-	ctx.HTML(http.StatusOK, "admin/admin.html", map[string]string{
+	ctx.HTML(http.StatusOK, "admin.html", map[string]string{
 		"Title": "DXC博客 › 管理员",
 	})
 }

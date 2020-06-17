@@ -14,6 +14,10 @@ import (
 	"github.com/stiwedung/libgo/log"
 )
 
+func init() {
+	log.GetLogger().WithOption(log.WriteCallerOption(config.Config.Common.LogCaller))
+}
+
 func main() {
 	dao.Connect()
 

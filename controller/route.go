@@ -41,8 +41,8 @@ func MapRoutes() *gin.Engine {
 	}
 	route := gin.New()
 	route.Use(logMiddleware, installMiddleware)
-	route.Use(sessions.Sessions("user", cookie.NewStore([]byte("gnudewits235711"))))
-	route.LoadHTMLGlob(filepath.Join(config.ROOT, "template/*/*.html"))
+	route.Use(sessions.Sessions("stiwedung", cookie.NewStore([]byte("gnudewits235711"))))
+	route.LoadHTMLGlob(filepath.Join(config.ROOT, "template/*.html"))
 	route.Static("/static", filepath.Join(config.ROOT, "static"))
 
 	g := route.Group("")

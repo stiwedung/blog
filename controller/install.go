@@ -21,7 +21,7 @@ func (ctrl *installController) relativePath() string {
 }
 
 func (ctrl *installController) GET(ctx *gin.Context) {
-	ctx.HTML(http.StatusOK, "install/install.html", map[string]string{"Title": "DXC博客 安装 › 配置文件"})
+	ctx.HTML(http.StatusOK, "install.html", map[string]string{"Title": "DXC博客 安装 › 配置文件"})
 }
 
 func (ctrl *installController) POST(ctx *gin.Context) {
