@@ -43,5 +43,5 @@ func (ctrl *adminController) POST(ctx *gin.Context) {
 		UserName: username,
 	})
 	session.Save()
-	ctx.Redirect(http.StatusSeeOther, "/")
+	ctx.Redirect(http.StatusSeeOther, "/admin/editor")
 }

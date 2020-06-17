@@ -21,9 +21,8 @@ func (ctrl *articleController) relativePath() string {
 }
 
 func (ctrl *articleController) regist(g *gin.RouterGroup) {
-	g.GET("/list/article", articleList)
-	g.GET("/editor", articleEditor)
-	g.POST("/write", articleWrite)
+	g.GET("/admin/editor", articleEditor)
+	g.POST("/admin/write", articleWrite)
 }
 
 func (ctrl *articleController) GET(ctx *gin.Context) {
@@ -46,7 +45,7 @@ func articleList(ctx *gin.Context) {
 }
 
 func articleEditor(ctx *gin.Context) {
-
+	ctx.String(http.StatusOK, "editor")
 }
 
 func articleWrite(ctx *gin.Context) {
