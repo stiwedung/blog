@@ -35,11 +35,6 @@ func addRegister(reg register) {
 	allRegister = append(allRegister, reg)
 }
 
-var templatePattern = []string{
-	"template/*.html",
-	"template/*/*.html",
-}
-
 func MapRoutes() *gin.Engine {
 	if config.Config.Common.ReleaseMode {
 		gin.SetMode(gin.ReleaseMode)
@@ -47,9 +42,7 @@ func MapRoutes() *gin.Engine {
 	route := gin.New()
 	route.Use(logMiddleware, installMiddleware)
 	route.Use(sessions.Sessions("user", cookie.NewStore([]byte("gnudewits235711"))))
-	for _, patt := range templatePattern {
-		route.LoadHTMLGlob(filepath.Join(config.ROOT, patt))
-	}
+	route.LoadHTMLGlob(filepath.Join(config.ROOT, "template/*/*.html"))
 	route.Static("/static", filepath.Join(config.ROOT, "static"))
 
 	g := route.Group("")

@@ -5,6 +5,7 @@ import (
 
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
+	"github.com/stiwedung/blog/config"
 	"github.com/stiwedung/blog/service"
 )
 
@@ -26,7 +27,8 @@ func (ctrl *adminController) GET(ctx *gin.Context) {
 
 func (ctrl *adminController) POST(ctx *gin.Context) {
 	var isLocal bool
-	if ctx.Request.RemoteAddr == "127.0.0.1" {
+	ip := ctx.ClientIP()
+	if (ip == "127.0.0.1" || ip == "::1") && !config.Config.Common.ReleaseMode {
 		isLocal = true
 	}
 	username := ctx.PostForm("username")
@@ -40,6 +42,6 @@ func (ctrl *adminController) POST(ctx *gin.Context) {
 	session.Set(userInfo, &sessionData{
 		UserName: username,
 	})
-	ctx.Redirect(http.StatusPermanentRedirect, "/")
+	ctx.Redirect(http.StatusSeeOther, "/")
 	session.Save()
 }

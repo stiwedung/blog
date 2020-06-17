@@ -23,7 +23,6 @@ type (
 		UserName string `xorm:"index notnull"`
 		Passcode string `xorm:"notnull"`
 		Passwd   string `xorm:"notnull"`
-		LoginIP  string `xorm:"notnull"`
 		IsAdmin  bool   `xorm:"notnull default(0)"`
 	}
 )
