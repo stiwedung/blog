@@ -42,6 +42,6 @@ func (ctrl *adminController) POST(ctx *gin.Context) {
 	session.Set(userInfo, &sessionData{
 		UserName: username,
 	})
-	ctx.Redirect(http.StatusSeeOther, "/")
 	session.Save()
+	ctx.Redirect(http.StatusSeeOther, "/")
 }
