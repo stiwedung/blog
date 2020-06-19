@@ -1,6 +1,8 @@
 package dao
 
 import (
+	"time"
+
 	"github.com/stiwedung/blog/config"
 	"github.com/stiwedung/blog/model"
 
@@ -56,6 +58,10 @@ func doConnect(url string) {
 		log.Fatalf("create tables error: %v", err)
 		return
 	}
+
+	db.SetMaxIdleConns(10)
+	db.SetMaxOpenConns(30)
+	db.SetConnMaxLifetime(5 * time.Minute)
 }
 
 func Disconnect() {
